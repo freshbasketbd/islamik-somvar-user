@@ -1,20 +1,254 @@
-<!doctype html>
-<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#123c2b"><title>ইসলামিক সম্ভার</title>
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123c2b">
+<title>ইসলামিক সম্ভার</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f8f5;color:#1b2a21;font-family:system-ui,"Noto Sans Bengali",sans-serif}header{background:linear-gradient(135deg,#103b29,#28704e);color:white;padding:25px 16px}.wrap{max-width:950px;margin:auto;padding:0 15px}.brand{display:flex;align-items:center;gap:13px}.logo{font-size:28px;background:#ffffff20;padding:12px;border-radius:15px}h1{font-size:24px;margin:0}header p{color:#e0eee4;font-size:14px}main{padding:20px 0}.search{width:100%;padding:14px;border:1px solid #dce6de;border-radius:12px;font:inherit}.head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px}.head h2{font-size:18px;margin:0}.muted{font-size:12px;color:#718077}.cats{display:flex;gap:8px;flex-wrap:wrap}.cat{border:1px solid #d7e4da;background:white;color:#123c2b;border-radius:22px;padding:9px 13px;font:inherit}.cat.active{background:#123c2b;color:white}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card,.detail{background:white;border:1px solid #e0e9e2;border-radius:14px;padding:15px}.card{cursor:pointer}.card h3{font-size:16px;margin:9px 0}.tag{font-size:11px;background:#edf5ef;color:#246b4c;padding:4px 8px;border-radius:20px}.preview{font-size:13px;line-height:1.7;color:#58665d;white-space:pre-wrap}.empty{grid-column:1/-1;text-align:center;padding:28px;background:white;border:1px dashed #ccdacf;border-radius:14px;color:#718077}.detail{display:none;margin-top:16px}.detail.show{display:block}.detail h2{font-size:20px}.body{white-space:pre-wrap;line-height:1.9;overflow-wrap:anywhere}.back{background:#eaf2ec;border:0;border-radius:8px;padding:9px 12px;color:#123c2b}.media{display:block;margin-top:14px;color:#246b4c;overflow-wrap:anywhere}footer{text-align:center;color:#718077;padding:22px;font-size:12px}@media(max-width:560px){.grid{grid-template-columns:1fr}h1{font-size:21px}}
-</style></head><body>
-<header><div class="wrap"><div class="brand"><div class="logo">☪</div><div><h1>ইসলামিক সম্ভার</h1><div>জ্ঞান, আমল ও সুন্দর জীবনের অনুপ্রেরণা</div></div></div><p>কোরআন, হাদিস, দোয়া ও ইসলামিক শিক্ষামূলক লেখা পড়ুন।</p></div></header>
-<main class="wrap"><input id="search" class="search" placeholder="কনটেন্ট খুঁজুন..." type="search"><div class="head"><h2>বিষয় নির্বাচন</h2><span id="catCount" class="muted"></span></div><div id="cats" class="cats">ক্যাটাগরি লোড হচ্ছে...</div><div class="head"><h2 id="listTitle">সর্বশেষ প্রকাশিত</h2><span id="count" class="muted"></span></div><section id="list" class="grid"><div class="empty">কনটেন্ট লোড হচ্ছে...</div></section><article id="detail" class="detail"></article></main><footer>© ইসলামিক সম্ভার</footer>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f7f3;color:#203329;font-family:'Hind Siliguri',sans-serif}
+header{background:#123c2b;color:white;padding:15px 18px}
+.wrap{max-width:1050px;margin:auto;padding:0 15px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{background:#d6a64b;color:#173c2b;width:45px;height:45px;border-radius:14px;display:grid;place-items:center;font-size:27px}
+h1{font-size:23px;margin:0}
+header small{color:#e5eadf}
+.hero{background:linear-gradient(130deg,#123c2b,#28734d);color:white;padding:38px 20px;text-align:center}
+.hero h2{font-size:27px;margin:0 0 8px}
+.hero p{color:#e5eadf;margin:5px 0 18px}
+.search{width:100%;max-width:550px;padding:14px;border:0;border-radius:12px;font:inherit}
+main{padding:25px 0}
+.heading{font-size:21px;margin:24px 0 12px;color:#17432e}
+.categories,.subs{display:flex;gap:9px;flex-wrap:wrap}
+.cat,.sub{border:1px solid #d9e3d9;background:white;color:#17432e;padding:9px 16px;border-radius:25px;font:inherit;cursor:pointer}
+.cat.active,.sub.active{background:#17432e;color:white}
+.subsection{background:#fff;border:1px solid #e0e7df;border-radius:15px;padding:16px;margin-top:15px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.card{background:white;border:1px solid #e0e7df;border-radius:15px;padding:16px;cursor:pointer}
+.card h3{margin:9px 0;font-size:18px}
+.tag{color:#966b20;background:#f8f0dc;border-radius:20px;padding:4px 10px;font-size:12px}
+.preview{font-size:14px;color:#66756a;line-height:1.7}
+.detail{display:none;background:white;border:1px solid #e0e7df;border-radius:15px;padding:20px;margin-top:18px}
+.detail.show{display:block}
+.detail-body{white-space:pre-wrap;line-height:2}
+.back{border:0;background:#e9f0e9;padding:9px 14px;border-radius:9px;font:inherit}
+.empty{background:white;border:1px dashed #ccd8ce;border-radius:12px;padding:25px;text-align:center;color:#718075;grid-column:1/-1}
+footer{background:#123c2b;color:#e4eee5;text-align:center;padding:25px;margin-top:35px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.hero h2{font-size:23px}h1{font-size:20px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap brand">
+  <div class="logo">☪</div>
+  <div><h1>ইসলামিক সম্ভার</h1><small>জ্ঞান, আমল ও সুন্দর জীবনের অনুপ্রেরণা</small></div>
+ </div>
+</header>
+
+<section class="hero">
+ <h2>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
+ <p>জ্ঞান হোক আলোর পথ, আমল হোক জীবনের সাথী</p>
+ <input id="search" class="search" placeholder="কোরআন, হাদিস বা বিষয় খুঁজুন...">
+</section>
+
+<main class="wrap">
+ <h2 class="heading">বিষয় নির্বাচন করুন</h2>
+ <div id="categories" class="categories">ক্যাটাগরি লোড হচ্ছে...</div>
+
+ <section id="subSection" class="subsection" hidden>
+  <h3 class="heading" style="margin-top:0">সাব-ক্যাটাগরি</h3>
+  <div id="subcategories" class="subs"></div>
+ </section>
+
+ <h2 class="heading" id="listTitle">সর্বশেষ প্রকাশিত</h2>
+ <section id="contents" class="grid">
+  <div class="empty">কনটেন্ট লোড হচ্ছে...</div>
+ </section>
+
+ <article id="detail" class="detail"></article>
+</main>
+
+<footer>
+ <h3>ইসলামিক সম্ভার</h3>
+ <p>কোরআন, হাদিস, দোয়া ও ইসলামিক জ্ঞানচর্চার একটি সুন্দর আয়োজন।</p>
+ <small>© ইসলামিক সম্ভার</small>
+</footer>
+
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import{getFirestore,collection,onSnapshot,query,where}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-const cfg={apiKey:"AIzaSyAAlcAg9uTyv8FXgqWp5mIgKJRqr8gzLkk",authDomain:"islamic-somvar.firebaseapp.com",projectId:"islamic-somvar",storageBucket:"islamic-somvar.firebasestorage.app",messagingSenderId:"823434968255",appId:"1:823434968255:web:0c5d961c1e0d5125f91a0a"};
-const db=getFirestore(initializeApp(cfg)),$=id=>document.getElementById(id);let data=[],cats=[],active="সব";
-function node(tag,cls,txt){let n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n}
-function drawCats(){let root=$("cats");root.replaceChildren();["সব",...new Set(cats.map(x=>x.name).filter(Boolean))].forEach(name=>{let b=node("button","cat"+(active===name?" active":""),name);b.onclick=()=>{active=name;drawCats();drawList()};root.append(b)});$("catCount").textContent=cats.length?cats.length.toLocaleString("bn-BD")+"টি ক্যাটাগরি":""}
-function detail(c){let d=$("detail");d.replaceChildren();let back=node("button","back","← তালিকায় ফিরুন");back.onclick=()=>d.classList.remove("show");d.append(back,node("h2","",c.title||"শিরোনাম নেই"),node("span","tag",c.category||""),node("div","body",c.body||""));if(c.mediaUrl){let a=node("a","media",c.type==="audio"?"অডিও শুনুন":c.type==="pdf"?"PDF খুলুন":"সংযুক্ত ফাইল খুলুন");a.href=c.mediaUrl;a.target="_blank";a.rel="noopener noreferrer";d.append(a)}d.classList.add("show");d.scrollIntoView({behavior:"smooth"})}
-function drawList(){let root=$("list");root.replaceChildren();$("detail").classList.remove("show");let term=$("search").value.toLowerCase().trim();let rows=data.filter(x=>(active==="সব"||x.category===active)&&(`${x.title||""} ${x.body||""} ${x.category||""}`).toLowerCase().includes(term));$("listTitle").textContent=active==="সব"?"সর্বশেষ প্রকাশিত":active;$("count").textContent=rows.length.toLocaleString("bn-BD")+"টি লেখা";if(!rows.length){root.append(node("div","empty","এখনো কোনো প্রকাশিত কনটেন্ট নেই।"));return}rows.forEach(c=>{let card=node("article","card");card.append(node("span","tag",c.category||"ইসলামিক লেখা"),node("h3","",c.title||"শিরোনাম নেই"));if(c.body)card.append(node("p","preview",c.body.slice(0,145)+(c.body.length>145?"…":"")));card.onclick=()=>detail(c);root.append(card)})}
-$("search").addEventListener("input",drawList);
-onSnapshot(query(collection(db,"contents"),where("published","==",true)),s=>{data=s.docs.map(d=>({id:d.id,...d.data()}));drawList()},e=>{$("list").replaceChildren(node("div","empty","কনটেন্ট লোড হয়নি। Firestore Rules পরীক্ষা করুন: "+e.message))});
-onSnapshot(collection(db,"categories"),s=>{cats=s.docs.map(d=>({id:d.id,...d.data()}));drawCats()},e=>{$("cats").textContent="ক্যাটাগরি লোড করা যায়নি"});
-</script></body></html>
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getFirestore,collection,onSnapshot,query,where} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyAAlcAg9uTyv8FXgqWp5mIgKJRqr8gzLkk",
+ authDomain:"islamic-somvar.firebaseapp.com",
+ projectId:"islamic-somvar",
+ storageBucket:"islamic-somvar.firebasestorage.app",
+ messagingSenderId:"823434968255",
+ appId:"1:823434968255:web:0c5d961c1e0d5125f91a0a"
+};
+
+const db=getFirestore(initializeApp(firebaseConfig));
+const $=id=>document.getElementById(id);
+
+let categories=[],subcategories=[],contents=[];
+let activeCategory="সব",activeSub="সব";
+
+function el(tag,cls,text){
+ const n=document.createElement(tag);
+ if(cls)n.className=cls;
+ if(text!==undefined)n.textContent=text;
+ return n;
+}
+
+function renderCategories(){
+ const root=$("categories");
+ root.replaceChildren();
+
+ const all=el("button","cat"+(activeCategory==="সব"?" active":""),"সব");
+ all.onclick=()=>selectCategory("সব");
+ root.append(all);
+
+ categories.forEach(c=>{
+  const b=el("button","cat"+(activeCategory===c.id?" active":""),c.name);
+  b.onclick=()=>selectCategory(c.id);
+  root.append(b);
+ });
+}
+
+function selectCategory(id){
+ activeCategory=id;
+ activeSub="সব";
+ renderCategories();
+ renderSubcategories();
+ renderContents();
+}
+
+function renderSubcategories(){
+ const section=$("subSection");
+ const root=$("subcategories");
+ root.replaceChildren();
+
+ if(activeCategory==="সব"){
+  section.hidden=true;
+  return;
+ }
+
+ const list=subcategories.filter(s=>s.categoryId===activeCategory);
+ section.hidden=false;
+
+ const all=el("button","sub active","সব");
+ all.onclick=()=>{
+  activeSub="সব";
+  renderSubcategories();
+  renderContents();
+ };
+ root.append(all);
+
+ list.forEach(s=>{
+  const b=el("button","sub"+(activeSub===s.id?" active":""),s.name);
+  b.onclick=()=>{
+   activeSub=s.id;
+   renderSubcategories();
+   renderContents();
+  };
+  root.append(b);
+ });
+
+ if(!list.length){
+  root.append(el("span","preview","এই ক্যাটাগরিতে এখনো সাব-ক্যাটাগরি যোগ করা হয়নি।"));
+ }
+}
+
+function showDetail(c){
+ const d=$("detail");
+ d.replaceChildren();
+
+ const back=el("button","back","← ফিরে যান");
+ back.onclick=()=>d.classList.remove("show");
+
+ d.append(back);
+ d.append(el("h2","",c.title||"শিরোনাম নেই"));
+ d.append(el("div","tag",c.subcategory||c.category||""));
+ d.append(el("div","detail-body",c.body||""));
+
+ if(c.mediaUrl){
+  const a=el("a","","ফাইল / অডিও / PDF খুলুন");
+  a.href=c.mediaUrl;
+  a.target="_blank";
+  a.rel="noopener noreferrer";
+  a.style.display="block";
+  a.style.marginTop="15px";
+  d.append(a);
+ }
+
+ d.classList.add("show");
+ d.scrollIntoView({behavior:"smooth"});
+}
+
+function renderContents(){
+ const root=$("contents");
+ root.replaceChildren();
+ $("detail").classList.remove("show");
+
+ const term=$("search").value.trim().toLowerCase();
+
+ const rows=contents.filter(c=>{
+  const cat=categories.find(x=>x.id===activeCategory);
+  const categoryMatch=activeCategory==="সব"||
+   c.categoryId===activeCategory||
+   (cat&&c.category===cat.name);
+
+  const subMatch=activeSub==="সব"||
+   c.subcategoryId===activeSub;
+
+  const searchMatch=(`${c.title||""} ${c.body||""} ${c.category||""} ${c.subcategory||""}`).toLowerCase().includes(term);
+
+  return categoryMatch&&subMatch&&searchMatch;
+ });
+
+ $("listTitle").textContent=activeCategory==="সব"?"সর্বশেষ প্রকাশিত":"নির্বাচিত কনটেন্ট";
+
+ if(!rows.length){
+  root.append(el("div","empty","এখনো কোনো প্রকাশিত কনটেন্ট নেই।"));
+  return;
+ }
+
+ rows.forEach(c=>{
+  const card=el("article","card");
+  card.append(el("span","tag",c.subcategory||c.category||"ইসলামিক লেখা"));
+  card.append(el("h3","",c.title||"শিরোনাম নেই"));
+  if(c.body)card.append(el("p","preview",c.body.slice(0,140)));
+  card.onclick=()=>showDetail(c);
+  root.append(card);
+ });
+}
+
+$("search").addEventListener("input",renderContents);
+
+onSnapshot(collection(db,"categories"),snap=>{
+ categories=snap.docs.map(d=>({id:d.id,...d.data()}));
+ renderCategories();
+ renderSubcategories();
+ renderContents();
+},err=>{
+ $("categories").textContent="ক্যাটাগরি লোড হয়নি: "+err.message;
+});
+
+onSnapshot(collection(db,"subcategories"),snap=>{
+ subcategories=snap.docs.map(d=>({id:d.id,...d.data()}));
+ renderSubcategories();
+ renderContents();
+});
+
+onSnapshot(query(collection(db,"contents"),where("published","==",true)),snap=>{
+ contents=snap.docs.map(d=>({id:d.id,...d.data()}));
+ renderContents();
+},err=>{
+ $("contents").replaceChildren(el("div","empty","কনটেন্ট লোড হয়নি: "+err.message));
+});
+</script>
+</body>
+</html>
